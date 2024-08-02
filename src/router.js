@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MainPage from './components/MainPage.vue'
-import ResultPage from './components/ResultPage.vue'
+import MainPage from '@/components/MainPage.vue'
+import ResultPage from '@/components/ResultPage.vue'
 
 const routes = [
   {
@@ -14,12 +14,11 @@ const routes = [
     component: ResultPage
   },
   {
-    path: '/track.rip/:domain/:url*',
+    path: '/track.rip/:url*',
     name: 'TrackRedirect',
     beforeEnter: (to, from, next) => {
-      const domain = to.params.domain || ''
       const finalUrl = to.params.url || ''
-      next({ name: 'MainPage', query: { domain, url: finalUrl }})
+      next({ name: 'MainPage', query: { url: finalUrl }})
     }
   },
   {

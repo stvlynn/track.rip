@@ -39,7 +39,6 @@
     },
     methods: {
       async processUrl() {
-        let domain = this.$route.query.domain || ''
         let extractedUrl = this.$route.query.url || this.inputUrl
         if (!extractedUrl) {
           // 未找到有效链接
@@ -47,7 +46,7 @@
         }
   
         try {
-          const finalUrl = await processUrlBasedOnDomain(domain, extractedUrl)
+          const finalUrl = await processUrlBasedOnDomain(extractedUrl)
           this.$router.push({ name: 'ResultPage', query: { url: finalUrl }})
         } catch (error) {
           // 处理 URL 时出错
