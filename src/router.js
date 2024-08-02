@@ -9,17 +9,17 @@ const routes = [
     component: MainPage
   },
   {
+    path: '/track',
+    name: 'TrackRedirect',
+    beforeEnter: (to, from, next) => {
+      const finalUrl = to.query.url || ''
+      next({ name: 'MainPage', query: { url: finalUrl }})
+    }
+  },
+  {
     path: '/result',
     name: 'ResultPage',
     component: ResultPage
-  },
-  {
-    path: '/track.rip/:url*',
-    name: 'TrackRedirect',
-    beforeEnter: (to, from, next) => {
-      const finalUrl = to.params.url || ''
-      next({ name: 'MainPage', query: { url: finalUrl }})
-    }
   },
   {
     path: '/:pathMatch(.*)*',
