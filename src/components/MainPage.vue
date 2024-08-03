@@ -46,6 +46,10 @@
         }
   
         try {
+          // 对 extractedUrl 进行预处理,确保它是一个有效的 URL 格式
+          if (extractedUrl.startsWith('/')) {
+            extractedUrl = extractedUrl.slice(1)
+          }
           const finalUrl = await processUrlBasedOnDomain(extractedUrl)
           this.$router.push({ name: 'ResultPage', query: { url: finalUrl }})
         } catch (error) {
