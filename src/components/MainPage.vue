@@ -39,17 +39,15 @@
     },
     methods: {
       async processUrl() {
-        let extractedUrl = this.$route.query.url || this.inputUrl
-        if (!extractedUrl) {
+        let originalUrl = this.$route.query.url || this.inputUrl
+        if (!originalUrl) {
           // 未找到有效链接
           return
         }
   
         try {
-          // 对 extractedUrl 进行预处理,确保它是一个有效的 URL 格式
-          if (extractedUrl.startsWith('/')) {
-            extractedUrl = extractedUrl.slice(1)
-          }
+          // 去掉URL开头的"/"字符
+          let extractedUrl = originalUrl.replace(/^\//, '')
           const finalUrl = await processUrlBasedOnDomain(extractedUrl)
           this.$router.push({ name: 'ResultPage', query: { url: finalUrl }})
         } catch (error) {
