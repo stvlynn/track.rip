@@ -49,10 +49,7 @@
           // 去掉URL开头的"/"字符
           let extractedUrl = originalUrl.replace(/^\//, '')
           const finalUrl = await processUrlBasedOnDomain(extractedUrl)
-          
-          // 如果处理后的URL前面有"/"字符,再次去掉
-          let resultUrl = finalUrl.startsWith('/') ? finalUrl.slice(1) : finalUrl
-          this.$router.push({ name: 'ResultPage', query: { url: resultUrl }})
+          this.$router.push({ name: 'ResultPage', query: { url: finalUrl }})
         } catch (error) {
           // 处理 URL 时出错
           console.error(error)
