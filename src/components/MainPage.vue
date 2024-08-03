@@ -39,13 +39,15 @@
     },
     methods: {
       async processUrl() {
-        let extractedUrl = this.$route.query.url || this.inputUrl
-        if (!extractedUrl) {
+        let originalUrl = this.$route.query.url || this.inputUrl
+        if (!originalUrl) {
           // 未找到有效链接
           return
         }
   
         try {
+          // 去掉URL开头的"/"字符
+          let extractedUrl = originalUrl.replace(/^\//, '')
           const finalUrl = await processUrlBasedOnDomain(extractedUrl)
           this.$router.push({ name: 'ResultPage', query: { url: finalUrl }})
         } catch (error) {
