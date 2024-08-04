@@ -3,8 +3,7 @@ import App from './App.vue'
 import router from './router'
 import './style.css'
 
-console.log('Vue version:', Vue.version)
-console.log('Current route:', router.currentRoute.value)
+console.log('Application initialization started')
 
 const app = createApp(App)
 
@@ -16,7 +15,10 @@ app.config.errorHandler = (err, vm, info) => {
 app.use(router)
 
 router.isReady().then(() => {
+  console.log('Router is ready, mounting app')
   app.mount('#app')
 }).catch(error => {
   console.error('Router error:', error)
 })
+
+console.log('Application initialization completed')
