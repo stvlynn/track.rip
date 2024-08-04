@@ -28,7 +28,7 @@ const processUrlBasedOnDomain = async (url) => {
     finalUrl = await processDefaultUrl(url)
   }
 
-  return `${window.location.origin}/result?url=${encodeURIComponent(finalUrl)}`
+  return finalUrl
 }
 
 async function processXiaoHongShu(url) {
@@ -48,7 +48,9 @@ async function processNetEaseMusic(url) {
 
 async function processBiliBili(url) {
   let extractedUrl = await extractUrlFromText(url)
-  return extractedUrl
+  let cleanUrl = new URL(extractedUrl)
+  cleanUrl.search = ''
+  return cleanUrl.toString()
 }
 
 async function processZhihu(url) {

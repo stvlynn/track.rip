@@ -14,8 +14,9 @@ const routes = [
     component: ResultPage
   },
   {
-    path: '/:pathMatch(.*)*',
-    redirect: '/'
+    path: '/:url(.*)',
+    name: 'ProcessUrl',
+    component: MainPage
   }
 ]
 
