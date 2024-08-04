@@ -21,7 +21,7 @@
           <span>小红书及其短链</span>
         </div>
         <div class="flex items-center justify-center mb-2">
-          <img src="../../public/weixin.png" class="w-[30px] h-[30px] rounded-full mr-2" />
+          <img src="../../public/wenxin.png" class="w-[30px] h-[30px] rounded-full mr-2" />
           <span>微信公众号</span>
         </div>
         <div class="flex items-center justify-center mb-2">
@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import { extractUrlFromText, resolveShortUrl } from '../utils/url-utils'
 import { processUrlBasedOnDomain } from '../utils/domain-specific-processors'
 
 export default {
