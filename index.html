@@ -1,23 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Track.rip</title>
+    <title>track.rip</title>
   </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
     <script>
       window.onerror = function(message, source, lineno, colno, error) {
-        console.error('Caught error:', error);
-        document.body.innerHTML += '<div style="color: red; position: fixed; top: 0; left: 0; right: 0; background: white; padding: 20px; z-index: 9999;">Error: ' + message + '<br>Source: ' + source + '<br>Line: ' + lineno + '<br>Column: ' + colno + '</div>';
+        document.body.innerHTML += '<div style="color: red; position: fixed; top: 0; left: 0; right: 0; background: white; padding: 20px; z-index: 9999;">Error: ' + message + '</div>';
       }
-      window.addEventListener('unhandledrejection', function(event) {
-        console.error('Unhandled rejection:', event.reason);
-        document.body.innerHTML += '<div style="color: red; position: fixed; top: 0; left: 0; right: 0; background: white; padding: 20px; z-index: 9999;">Unhandled Rejection: ' + event.reason + '</div>';
-      });
     </script>
   </body>
 </html>
