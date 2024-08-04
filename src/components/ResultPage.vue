@@ -55,7 +55,7 @@ export default {
   methods: {
     copyUrl() {
       navigator.clipboard.writeText(this.finalUrl)
-      alert('链接已复制到剪贴板')
+      alert('已复制')
     }
   }
 }
