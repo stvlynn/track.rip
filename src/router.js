@@ -35,9 +35,6 @@ router.beforeEach((to, from, next) => {
       params: { url: to.path.slice(1) },  // Remove the leading '/'
       replace: true
     })
-  } else if (to.name === 'ProcessUrl' && to.params.url) {
-    // If we're already on the ProcessUrl route with a URL parameter, allow it to proceed
-    next()
   } else {
     next()
   }

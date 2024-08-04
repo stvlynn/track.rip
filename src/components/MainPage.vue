@@ -45,7 +45,7 @@ export default {
 
       try {
         const finalUrl = await processUrlBasedOnDomain(this.inputUrl)
-        this.redirectToResult(finalUrl)
+        window.location.href = `${window.location.origin}/result?url=${encodeURIComponent(finalUrl)}`
       } catch (error) {
         // Error processing URL
         console.error(error)
@@ -54,20 +54,13 @@ export default {
     async processUrlFromParams(url) {
       try {
         const finalUrl = await processUrlBasedOnDomain(url)
-        this.redirectToResult(finalUrl)
+        window.location.href = `${window.location.origin}/result?url=${encodeURIComponent(finalUrl)}`
       } catch (error) {
         // Error processing URL from params
         console.error(error)
         // If there's an error, we should still show the main page
         this.inputUrl = url
       }
-    },
-    redirectToResult(url) {
-      // Use Vue Router to navigate to the result page
-      this.$router.push({
-        name: 'ResultPage',
-        query: { url: encodeURIComponent(url) }
-      })
     }
   }
 }
