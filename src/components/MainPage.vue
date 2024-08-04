@@ -1,23 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-screen relative">
-    <div class="absolute inset-0 bg-cover bg-center blur-[40%]" style="background-image: url('https://www.loliapi.com/acg/')"></div>
-    <div class="bg-white/90 shadow-md hover:shadow-2xl transition-shadow rounded-[50px] p-8 w-full max-w-md relative z-10">
-      <h1 class="text-4xl font-bold mb-8 text-center">去除追踪参数</h1>
-      <input
-        v-model="inputUrl"
-        type="text"
-        class="border border-gray-300 rounded-[50px] px-4 py-3 w-full mb-4 text-center"
-        placeholder="请输入链接"
-      />
-      <button
-        @click="processUrl"
-        class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-3 px-6 rounded-[50px] w-full"
-      >
-        处理
-      </button>
-      <!-- Rest of the template remains the same -->
-    </div>
-  </div>
+  <!-- Template remains the same -->
 </template>
 
 <script>
@@ -53,8 +35,7 @@ export default {
     },
     async processUrlFromParams(url) {
       try {
-        const decodedUrl = decodeURIComponent(url)
-        const finalUrl = await processUrlBasedOnDomain(decodedUrl)
+        const finalUrl = await processUrlBasedOnDomain(url)
         window.location.href = `${window.location.origin}/result?url=${encodeURIComponent(finalUrl)}`
       } catch (error) {
         // Error processing URL from params
