@@ -30,7 +30,7 @@ export default {
       inputUrl: ''
     }
   },
-  created() {
+  mounted() {
     // Check if there's a URL in the route params
     if (this.$route.params.url) {
       this.processUrlFromParams(this.$route.params.url)
@@ -53,12 +53,13 @@ export default {
     },
     async processUrlFromParams(url) {
       try {
-        const decodedUrl = decodeURIComponent(url)
-        const finalUrl = await processUrlBasedOnDomain(decodedUrl)
+        const finalUrl = await processUrlBasedOnDomain(url)
         window.location.href = `${window.location.origin}/result?url=${encodeURIComponent(finalUrl)}`
       } catch (error) {
         // Error processing URL from params
         console.error(error)
+        // If there's an error, we should still show the main page
+        this.inputUrl = url
       }
     }
   }
