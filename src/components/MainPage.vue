@@ -3,12 +3,23 @@
     <div class="absolute inset-0 bg-cover bg-center blur-[40%]" style="background-image: url('https://www.loliapi.com/acg/')"></div>
     <div class="bg-white/90 shadow-md hover:shadow-2xl transition-shadow rounded-[50px] p-8 w-full max-w-md relative z-10">
       <h1 class="text-4xl font-bold mb-8 text-center">去除追踪参数</h1>
-      <input
-        v-model="inputUrl"
-        type="text"
-        class="border border-gray-300 rounded-[50px] px-4 py-3 w-full mb-4 text-center"
-        placeholder="请输入链接"
-      />
+      <div class="relative">
+        <input
+          v-model="inputUrl"
+          type="text"
+          class="border border-gray-300 rounded-[50px] px-4 py-3 w-full pr-12 text-center"
+          placeholder="请输入链接"
+        />
+        <button
+          @click="pasteUrl"
+          class="absolute top-1/2 -translate-y-1/2 right-4 text-gray-500 hover:text-gray-700"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+        </button>
+      </div>
+      <div class="mt-4"></div>
       <button
         @click="processUrl"
         class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-3 px-6 rounded-[50px] w-full"
@@ -58,10 +69,7 @@ export default {
     // Check if there's a URL in the route params
     if (this.$route.params.url) {
       this.inputUrl = this.$route.params.url
-      // console.log(this.inputUrl.includes(':/'))
-      // console.log(this.inputUrl.includes('://'))
       if(this.inputUrl.includes(':/') && !this.inputUrl.includes('://')){
-        console.log('process')
         this.inputUrl = this.inputUrl.replace(':/', '://')
       }
       if(!this.inputUrl.startsWith('http://') && !this.inputUrl.startsWith('https://')){
@@ -92,7 +100,6 @@ export default {
           url = 'http' + url;
         }
         const finalUrl = await processUrlBasedOnDomain(url)
-        // console.log(finalUrl)
         this.$router.push(`/result?url=${encodeURIComponent(finalUrl)}`)
       } catch (error) {
         // Error processing URL from params
@@ -100,6 +107,12 @@ export default {
         // If there's an error, we should still show the main page
         this.inputUrl = url
       }
+    },
+    pasteUrl() {
+      // 在这里实现粘贴功能
+      navigator.clipboard.readText().then(text => {
+        this.inputUrl = text;
+      });
     }
   }
 }
