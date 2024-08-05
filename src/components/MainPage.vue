@@ -34,9 +34,11 @@ export default {
     // Check if there's a URL in the route params
     if (this.$route.params.url) {
       this.inputUrl = this.$route.params.url
-      if(!this.inputUrl.startsWith('https://' || 'http://')) {
-        this.inputUrl.replace('http:/', 'http://')
-        this.inputUrl.replace('https:/', 'https://')
+      console.log(this.inputUrl.includes(':/'))
+      console.log(this.inputUrl.includes('://'))
+      if(this.inputUrl.includes(':/') && !this.inputUrl.includes('://')){
+        console.log('process')
+        this.inputUrl = this.inputUrl.replace(':/', '://')
       }
       this.processUrlFromParams(this.inputUrl)
     }
@@ -47,7 +49,6 @@ export default {
         // No valid link found
         return
       }
-
       try {
         const finalUrl = await processUrlBasedOnDomain(this.inputUrl)
         window.location.href = `${window.location.origin}/result?url=${encodeURIComponent(finalUrl)}`
@@ -57,11 +58,10 @@ export default {
       }
     },
     async processUrlFromParams(url) {
-      console.log(this.$route.params)
-      console.log(url)
       try {
         const finalUrl = await processUrlBasedOnDomain(url)
-        this.$router.push(`${window.location.origin}/result?url=${encodeURIComponent(finalUrl)}`)
+        console.log(finalUrl)
+        this.$router.push(`/result?url=${encodeURIComponent(finalUrl)}`)
       } catch (error) {
         // Error processing URL from params
         console.error(error)
