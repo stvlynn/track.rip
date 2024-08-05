@@ -40,6 +40,9 @@ export default {
         console.log('process')
         this.inputUrl = this.inputUrl.replace(':/', '://')
       }
+      if(!this.inputUrl.startsWith('http://') && !this.inputUrl.startsWith('https://')){
+        this.inputUrl = 'http://' + this.inputUrl
+      }
       this.processUrlFromParams(this.inputUrl)
     }
   },
