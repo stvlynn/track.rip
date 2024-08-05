@@ -3,65 +3,51 @@ import { extractUrlFromText, resolveShortUrl } from './url-utils'
 const processUrlBasedOnDomain = async (url) => {
   let finalUrl = url
 
+  // 处理 x.com 链接
+  if (url.includes('x.com')) {
+    const parsedUrl = new URL(url)
+    parsedUrl.hostname = 'fixupx.com'
+    finalUrl = parsedUrl.toString()
+  }
   // 处理小红书及其短链
-  if (url.includes('xiaohongshu.com') || url.includes('xhslink.com')) {
-    finalUrl = await processXiaoHongShu(url)
+  else if (url.includes('xiaohongshu.com') || url.includes('xhslink.com')) {
+    const parsedUrl = new URL(url)
+    parsedUrl.search = ''
+    parsedUrl.searchParams.set('xsec_token', 'CB7qo0pm---5VGlM5e3nteJTbaXUIBIzWehQTYSqJKOR0=')
+    finalUrl = parsedUrl.toString()
   }
   // 处理微信公众号
-  else if (url.includes('mp.weixin.qq.com')) {
-    finalUrl = await processWeiXin(url)
+  else if (url.includes('weixin.qq.com')) {
+    const chksmIndex = url.indexOf('&chksm')
+    if (chksmIndex !== -1) {
+      finalUrl = url.substring(0, chksmIndex)
+    }
   }
   // 处理网易云音乐及其短链
   else if (url.includes('music.163.com') || url.includes('y.qq.com')) {
-    finalUrl = await processNetEaseMusic(url)
+    const useridIndex = url.indexOf('&')
+    if (useridIndex !== -1) {
+      finalUrl = url.substring(0, useridIndex)
+    }
   }
-  // 处理 B 站及其短链
-  else if (url.includes('bilibili.com')) {
-    finalUrl = await processBiliBili(url)
+  // 处理 163cn.tv 短链接
+  else if (url.includes('163cn.tv')) {
+    const resolvedUrl = await resolveShortUrl(url)
+    const firstAmpersandIndex = resolvedUrl.indexOf('&')
+    if (firstAmpersandIndex !== -1) {
+      finalUrl = resolvedUrl.substring(0, firstAmpersandIndex)
+    } else {
+      finalUrl = resolvedUrl
+    }
   }
-  // 处理知乎
-  else if (url.includes('zhihu.com')) {
-    finalUrl = await processZhihu(url)
-  }
-  // 其他域名采用默认处理逻辑（清空第一个?后的查询参数）
+  // 其他域名采用默认处理逻辑（清空查询参数）
   else {
-    finalUrl = await processDefaultUrl(url)
+    const parsedUrl = new URL(url)
+    parsedUrl.search = ''
+    finalUrl = parsedUrl.toString()
   }
 
   return finalUrl
-}
-
-async function processXiaoHongShu(url) {
-  let extractedUrl = await extractUrlFromText(url)
-  return extractedUrl
-}
-
-async function processWeiXin(url) {
-  let extractedUrl = await extractUrlFromText(url)
-  return extractedUrl
-}
-
-async function processNetEaseMusic(url) {
-  let extractedUrl = await extractUrlFromText(url)
-  return extractedUrl
-}
-
-async function processBiliBili(url) {
-  let extractedUrl = await extractUrlFromText(url)
-  let cleanUrl = new URL(extractedUrl)
-  cleanUrl.search = ''
-  return cleanUrl.toString()
-}
-
-async function processZhihu(url) {
-  let extractedUrl = await extractUrlFromText(url)
-  return extractedUrl
-}
-
-async function processDefaultUrl(url) {
-  let extractedUrl = new URL(url)
-  extractedUrl.search = ''
-  return extractedUrl.toString()
 }
 
 export { processUrlBasedOnDomain }
