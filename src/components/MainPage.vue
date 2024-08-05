@@ -57,7 +57,17 @@ export default {
   mounted() {
     // Check if there's a URL in the route params
     if (this.$route.params.url) {
-      this.processUrlFromParams(this.$route.params.url)
+      this.inputUrl = this.$route.params.url
+      // console.log(this.inputUrl.includes(':/'))
+      // console.log(this.inputUrl.includes('://'))
+      if(this.inputUrl.includes(':/') && !this.inputUrl.includes('://')){
+        console.log('process')
+        this.inputUrl = this.inputUrl.replace(':/', '://')
+      }
+      if(!this.inputUrl.startsWith('http://') && !this.inputUrl.startsWith('https://')){
+        this.inputUrl = 'http://' + this.inputUrl
+      }
+      this.processUrlFromParams(this.inputUrl)
     }
   },
   methods: {
@@ -82,7 +92,8 @@ export default {
           url = 'http' + url;
         }
         const finalUrl = await processUrlBasedOnDomain(url)
-        window.location.href = `${window.location.origin}/result?url=${encodeURIComponent(finalUrl)}`
+        // console.log(finalUrl)
+        this.$router.push(`/result?url=${encodeURIComponent(finalUrl)}`)
       } catch (error) {
         // Error processing URL from params
         console.error(error)
