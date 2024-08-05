@@ -2,6 +2,8 @@
 
 track.rip 是一个去除链接的追踪参数的在线工具。
 
+![logo](public/favicon.jpg)
+
 demo 地址：https://track.rip/
 
 ## 介绍
