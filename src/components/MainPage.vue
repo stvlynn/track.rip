@@ -52,9 +52,11 @@ export default {
       }
     },
     async processUrlFromParams(url) {
+      console.log(this.$route.params)
+      console.log(url)
       try {
         const finalUrl = await processUrlBasedOnDomain(url)
-        window.location.href = `${window.location.origin}/result?url=${encodeURIComponent(finalUrl)}`
+        this.$router.push(`${window.location.origin}/result?url=${encodeURIComponent(finalUrl)}`)
       } catch (error) {
         // Error processing URL from params
         console.error(error)
