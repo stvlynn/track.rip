@@ -33,7 +33,12 @@ export default {
   mounted() {
     // Check if there's a URL in the route params
     if (this.$route.params.url) {
-      this.processUrlFromParams(this.$route.params.url)
+      this.inputUrl = this.$route.params.url
+      if(!this.inputUrl.startsWith('https://' || 'http://')) {
+        this.inputUrl.replace('http:/', 'http://')
+        this.inputUrl.replace('https:/', 'https://')
+      }
+      this.processUrlFromParams(this.inputUrl)
     }
   },
   methods: {
