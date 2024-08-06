@@ -72,7 +72,7 @@ demo 地址：https://track.rip/
 
 - 感谢 [@mitian233](https://github.com/mitian233) 提供了修改建议以及pr ~~对不起我后来的git push --force覆盖了你的pr记录😭~~
 
-- 感谢 [@leez233](https://github.com/leez233) ，本项目参考了[tracker-remover](https://tr.lizi.su/)链接处理部分的代码
+- 感谢 [@leez233](https://github.com/leez233) ，本项目参考了[tracker-remover](https://github.com/leez233/tracker-remover)链接处理部分的代码
 
 ## 贡献
 
