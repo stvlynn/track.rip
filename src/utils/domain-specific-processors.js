@@ -1,6 +1,11 @@
 import { extractUrlFromText, resolveShortUrl } from './url-utils'
 
-const processUrlBasedOnDomain = async (url) => {
+const processUrlBasedOnDomain = async (input) => {
+  let url = extractUrlFromText(input)
+  if (!url) {
+    throw new Error('输入的字符串中不包含有效的 URL')
+  }
+
   let finalUrl = url
 
   // 处理 x.com 链接
