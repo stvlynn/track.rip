@@ -20,7 +20,7 @@ demo 地址：https://track.rip/
 
 - 其他常见链接（包含?的）
 
-- 暂不支持YouTube等
+- 支持粘贴口令
 
 ## 使用方法
 
@@ -59,8 +59,6 @@ demo 地址：https://track.rip/
 ## ‼️待实现内容
 
 - 部署到Vercel
-
-- 读取复制口令的链接
 
 - 小红书短链接（xhslink）、B站（b23.tv）短链接的处理
 
