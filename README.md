@@ -54,11 +54,9 @@ demo 地址：https://track.rip/
 
 ### Vercel
 
-暂不支持Vercel，因为未知原因会白屏，请大佬多多提交pr😭
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fstvlynn%2Ftrack.rip)
 
 ## ‼️待实现内容
-
-- 部署到Vercel
 
 - 小红书短链接（xhslink）、B站（b23.tv）短链接的处理
 
@@ -68,9 +66,11 @@ demo 地址：https://track.rip/
 
 ## 感谢
 
-- 感谢 [@mitian233](https://github.com/mitian233) 提供了修改建议以及pr ~~对不起我后来的git push --force覆盖了你的pr记录😭~~
+- 感谢 [@mitian233](https://github.com/mitian233) 提供了对url格式的修改以及pr ~~对不起我后来的git push --force覆盖了你的pr记录😭~~
 
 - 感谢 [@leez233](https://github.com/leez233) ，本项目参考了[tracker-remover](https://github.com/leez233/tracker-remover)链接处理部分的代码
+
+- 感谢 [@KritaniAyaka](https://github.com/KiritaniAyaka) 解决了vercel部署问题
 
 ## 贡献
 
