@@ -84,7 +84,7 @@ export default {
 
       try {
         const finalUrl = await processUrlBasedOnDomain(this.inputUrl)
-        window.location.href = `${window.location.origin}/result?url=${encodeURIComponent(finalUrl)}`
+        this.$router.push(`/result?url=${encodeURIComponent(finalUrl)}`)
       } catch (error) {
         // Error processing URL
         console.error(error)
